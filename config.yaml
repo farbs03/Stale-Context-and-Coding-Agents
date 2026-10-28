@@ -1,0 +1,52 @@
+# All tunable parameters for the project. Scripts read values from here only.
+
+phase1:
+  context_filenames: [AGENTS.md, CLAUDE.md]
+  min_stars: 10
+  min_context_file_commits: 3
+  min_days_since_file_created: 30
+  n_repos: 150            # reduce to 60 if running late
+  n_code_sample: 100      # researcher codes the first 50 tonight/Thursday
+  n_pilot: 50             # pilot = first n_pilot rows of the shuffled sample
+  max_per_repo_in_sample: 3
+  seed: 42
+  reference_types: [PATH, SCRIPT, TOOL, IDENT]   # drop IDENT first if short on time
+
+  env:
+    min_git_version: "2.30"
+    token_env_var: GITHUB_TOKEN
+
+  github:
+    api_base: https://api.github.com
+    per_page: 100
+    max_results_per_query: 1000     # documented cap for /search/code
+    # Initial size: partitions (bytes) for code search; any partition whose
+    # total_count exceeds the cap is split in half recursively.
+    search_size_min: 0
+    search_size_max: 400000          # only files < 384 KB are indexed
+    min_partition_width: 1           # stop splitting below this width
+    max_retries: 8
+    backoff_base_seconds: 5
+    request_timeout_seconds: 30
+    # Commits-API check is the expensive part of Stage 1; only check this many
+    # candidate repos (highest stars first) after metadata filtering.
+    max_repos_to_check_commits: 1500
+
+  clone:
+    mode: partial          # partial (--filter=blob:none) | full; see DECISIONS.md
+    timeout_seconds: 900
+
+  extract:
+    ident_min_length: 4
+    known_extensions: [py, js, ts, tsx, jsx, mjs, cjs, json, yaml, yml, toml, md, sh,
+                       go, rs, java, kt, rb, php, c, h, cpp, hpp, cs, swift, sql,
+                       html, css, scss, txt, cfg, ini, lock, env, mdx, vue, svelte,
+                       gradle, xml, proto, graphql, dart, ex, exs, lua, zig, scala]
+
+  drift:
+    correction_message_regex: "outdated|stale|fix|update|rename|correct|no longer|deprecat|moved|removed"
+    ident_grep_excludes: [":(exclude)*.md", ":(exclude)*.mdx", ":(exclude)docs/**", ":(exclude)doc/**"]
+
+  coding_cards:
+    context_lines: 3
+    diff_snippet_max_lines: 30
