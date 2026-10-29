@@ -6,3 +6,7 @@ __pycache__/
 data/repos/
 # REST commit responses contain commit-author emails: keep locally (cache), never commit.
 data/raw/commits/
+# Large derived files, reproducible from data/repos via phase1.history / phase1.extract.
+data/interim/versions.jsonl
+data/interim/references.jsonl
+data/interim/globs.jsonl

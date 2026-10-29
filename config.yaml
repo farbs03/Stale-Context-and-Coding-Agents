@@ -43,7 +43,8 @@ phase1:
     max_repos_to_check_commits: 1500
 
   clone:
-    mode: partial          # partial (--filter=blob:none) | full; see DECISIONS.md
+    mode: full             # partial (--filter=blob:none) | full; see DECISIONS.md
+    workers: 4
     timeout_seconds: 900
 
   extract:

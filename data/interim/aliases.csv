@@ -1,0 +1,6 @@
+repo,path,commit,kind,target
+doocs/md,AGENTS.md,8aaa523f8a66ba6a7e070480e8d9f5b7490d6bd7,import,CLAUDE.md
+lfglabs-dev/verity,CLAUDE.md,b571e09df615753c5c782b2e6eb915bc85cbbb9e,symlink,AGENTS.md
+percona/pmm,managed/AGENTS.md,f7939dcc3e06cb7428c6a8fe8c19fbc02f2a35ab,symlink,.github/instructions/managed.instructions.md
+percona/pmm,managed/AGENTS.md,6a69a3d4c726bee2e3e438228c9161cfa979444d,symlink,.github/instructions/managed.instructions.md
+maximecb/plush,CLAUDE.md,1761827a6bdd660519d47d935fad286411b000e3,symlink,AGENTS.md

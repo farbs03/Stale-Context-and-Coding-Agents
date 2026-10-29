@@ -1,0 +1,7 @@
+repo,mode,clone_s,show_s,ls_tree_s,grep_s,disk_mb
+Conchylicultor/singularity,partial,2.0,0.44,0.04,2.73,43.4
+Conchylicultor/singularity,full,5.9,0.02,0.04,0.21,145.6
+Osiris-DevWorks/smart-citizen,partial,0.8,0.41,0.02,2.03,71.3
+Osiris-DevWorks/smart-citizen,full,7.8,0.03,0.02,0.27,111.8
+quinn-dougherty/forever-vo,partial,1.0,0.44,0.02,1.58,2.6
+quinn-dougherty/forever-vo,full,1.9,0.02,0.02,0.03,33.2
