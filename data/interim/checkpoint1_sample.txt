@@ -1,0 +1,40 @@
+[PATH  ] 'responses/fetch'  (plain, EdanStarfire/claudecode_webui frontend/CLAUDE.md v13 L98)
+         line: 30s), liveness derived only from poll responses/fetch outcomes (no wall-clock staleness
+[PATH  ] 'Fluence.Wpf.Demo/Fluence.Wpf.Demo.csproj'  (inline, sintaxasn/Fluence.Wpf AGENTS.md v31 L277)
+         line: - The gallery demo is run with `dotnet run --project Fluence.Wpf.Demo/Fluence.Wpf.Demo.csproj -f net472` or the matching `net10.0-windows10.0.26100.0` TFM.
+[IDENT ] 'FONT_COLORS'  (inline, quinn-dougherty/forever-vo CLAUDE.md v20 L385)
+         line: `FONT_COLORS` in `UI/TalkingHead.lua`. Check both kits after touching it.
+[PATH  ] 'Ports'  (inline, stephaneweg/Onyx CLAUDE.md v39 L53)
+         line: > - **`Emulators/`** the emulators' cores (gb, gba, nes, snes, n64, gc, `emucore.h`); **`Ports/`** doom, stk;
+[PATH  ] 'stream/answer'  (plain, arc53/DocsGPT-cli CLAUDE.md v11 L510)
+         line: 3. Model selection: `model:` (suite/case) or `--model` → `model_id` on stream/answer, `model` on v1; stamped into every result. NOTE: the server currently ignor
+[IDENT ] 'before_drop'  (inline, project-minigraf/temporal_reasoning CLAUDE.md v66 L1735)
+         line: explicit (58 of them `before_drop`'s) + 58 drops + 9 auto = ~49 s to 22
+[IDENT ] 'FluenceWindow'  (inline, sintaxasn/Fluence.Wpf AGENTS.md v71 L405)
+         line: - **Hard-coding caption metrics or backdrop flags in child controls** -> breaks on Windows 10 / unsupported DWM builds. Fix: read `OsVersionHelper` and honour `
+[IDENT ] 'ThemeTestHelpers.ApplyStandardThemeCycle'  (inline, sintaxasn/Fluence.Wpf AGENTS.md v15 L215)
+         line: - Cover at minimum: default style applies, key template parts found, critical DP/state transitions, and (if theme-sensitive) one theme cycle via `ThemeTestHelpe
+[PATH  ] 'schema/scripts'  (plain, roqueribeiro/roqueos-containers-list CLAUDE.md v8 L75)
+         line: Cross-repo doc-sync mapping (changed X → update Y) lives in [`../roqueos-front/.claude/rules/97-docs-sync.md`](../roqueos-front/.claude/rules/97-docs-sync.md) (
+[IDENT ] 'getDedupStats'  (inline, amanning3390/flowstate-qmd CLAUDE.md v22 L160)
+         line: via `getDedupStats()` and visible in `qmd status`.
+[PATH  ] 'Dockerfile'  (plain, kenlasko/monize CLAUDE.md v46 L74)
+         line: **`.dockerignore` is not `.gitignore`: a filename glob needs an explicit `**/`.** A pattern with no slash is matched against the path relative to the build cont
+[PATH  ] 'TestUtil.swift'  (inline, palle-k/DL4S AGENTS.md v6 L24)
+         line: Tests use Swift Testing (`@Suite` structs with `@Test` functions) in `Tests/DL4STests`. Tests that train real models for minutes (`ModelTests`, `TransformerTest
+[IDENT ] 'taskBranchMap'  (inline, 0xc00010ff/proq CLAUDE.md v13 L167)
+         line: - `taskBranchMap` built from tasks with `branch` field, passed to TopBar for branch annotation
+[PATH  ] 'Sounds'  (inline, quinn-dougherty/forever-vo CLAUDE.md v38 L499)
+         line: own set in the stats (`narratorFiles`, paths relative to `Sounds/`).
+[PATH  ] 'pyproject.toml'  (plain, quinn-dougherty/forever-vo CLAUDE.md v34 L176)
+         line: fvo-<x>` (the console scripts in `pyproject.toml`), `./tools/run.sh python -c
+[IDENT ] 'REMOVE_SHARES'  (inline, kenlasko/monize CLAUDE.md v58 L269)
+         line: `applyActionToQuantity` (`backend/src/securities/investment-replay.util.ts`), with `SHARE_MOVING_ACTIONS` naming the set. `quantity` means shares for most actio
+[IDENT ] 'proved_nothing'  (inline, project-minigraf/temporal_reasoning CLAUDE.md v61 L2027)
+         line: `proved_nothing` on the orphan check — the honest answer, and the reason
+[PATH  ] 'src/import.asm'  (inline, jgarzik/apython CLAUDE.md v19 L234)
+         line: - `src/import.asm` — the import system: finders, `sys.modules`, packages
+[PATH  ] 'projects'  (fence, edspencer/bragdoc-ai AGENTS.md v16 L150)
+         line: projects/          the Projects page's pieces: Gantt, ProjectDialog, CompanyDialog, Pile, ReposPanel
+[PATH  ] 'tokens.css'  (inline, emdash-cms/templates blog/AGENTS.md v4 L81)
+         line: Design tokens live in `src/styles/tokens.css` with their default values. To restyle the site, override tokens in `src/styles/theme.css` -- declarations there ar

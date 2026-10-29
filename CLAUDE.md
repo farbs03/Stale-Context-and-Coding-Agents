@@ -36,6 +36,7 @@ python -m phase1.check_env      # Stage 0: token + git version
 python -m phase1.discover       # Stage 1: code-search sample -> data/interim/repos.csv
 python -m phase1.clone [--benchmark]  # Stage 2a: bare full clones -> data/repos/
 python -m phase1.history        # Stage 2b: context-file versions -> data/interim/versions.jsonl
+python -m phase1.extract [--sample 20]  # Stage 3: references -> data/interim/references.jsonl
 python -m pytest -q tests       # run before committing
 ```
 

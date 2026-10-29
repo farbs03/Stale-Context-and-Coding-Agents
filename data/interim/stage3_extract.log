@@ -1,0 +1,3 @@
+versions processed: 3525
+references per type: {'IDENT': 154722, 'PATH': 202171, 'SCRIPT': 12929, 'TOOL': 12664}
+globs logged (excluded): 28525

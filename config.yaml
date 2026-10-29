@@ -73,17 +73,34 @@ phase1:
                      HuggingFace, PostCSS, TailwindCSS, ESLint, BigQuery, ClickHouse,
                      RabbitMQ, ElasticSearch, OAuth, JSDoc, TSDoc, NumPy, SciPy, CircleCI,
                      README, TODO, FIXME, CHANGELOG, CONTRIBUTING, YAML, JSON, HTML, HTTP,
-                     HTTPS, UUID, CRUD, REST, TOML, true_or_false]
+                     HTTPS, UUID, CRUD, REST, TOML, true_or_false,
+                     # naming-style words, not identifiers
+                     snake_case, camelCase, PascalCase, UpperCamelCase, lowerCamelCase,
+                     kebab_case, SCREAMING_SNAKE_CASE, UPPER_SNAKE_CASE, UPPER_CASE,
+                     vX.Y.Z, x.y.z, MAJOR.MINOR.PATCH]
     script_builtins: [install, i, add, remove, rm, uninstall, update, up, upgrade, ci, init,
                       create, dlx, exec, x, link, unlink, publish, pack, audit, outdated,
                       list, ls, why, info, config, set, version, login, logout, cache,
                       store, prune, dedupe, import, rebuild, help, workspace, workspaces,
                       global, bin, root, env, patch, approve-builds, self-update, setup,
                       licenses, node, plugin, constraints, dlx, upgrade-interactive]
-    known_extensions: [py, js, ts, tsx, jsx, mjs, cjs, json, yaml, yml, toml, md, sh,
-                       go, rs, java, kt, rb, php, c, h, cpp, hpp, cs, swift, sql,
-                       html, css, scss, txt, cfg, ini, lock, env, mdx, vue, svelte,
-                       gradle, xml, proto, graphql, dart, ex, exs, lua, zig, scala]
+    known_extensions: [py, js, ts, tsx, jsx, mjs, cjs, json, yaml, yml, toml, md, sh, go, rs,
+                       java, kt, rb, php, c, h, cpp, hpp, cs, swift, sql, html, css, scss,
+                       txt, cfg, ini, lock, env, mdx, vue, svelte, gradle, xml, proto,
+                       graphql, dart, ex, exs, lua, zig, scala, nix, mod, sum, props, targets,
+                       csproj, fsproj, vbproj, sln, slnx, kts, cmake, mk, tf, tfvars, hcl,
+                       bzl, bazel, plist, xcconfig, entitlements, pbxproj, xcodeproj,
+                       xcworkspace, storyboard, xib, ml, mli, hs, cabal, jl, pl, pm, mm,
+                       ipynb, csv, tsv, svg, png, jpg, jpeg, gif, ico, webp, wasm, sqlite,
+                       conf, pem, lean, nim, elm, erl, hrl, clj, cljs, edn, ps1, psm1, bat,
+                       cmd, fish, zsh, bash, lockb, jsonc, json5, mts, cts, astro, prisma,
+                       rego, cue, jsonl, ndjson, parquet, cu, cuh, glsl, wgsl, hlsl, metal,
+                       gd, tscn, tres, uproject, uplugin, qml, axaml, xaml, resx, razor,
+                       cshtml, twig, blade, ejs, hbs, liquid, pug, njk, j2, jinja, tmpl, tpl,
+                       rst, adoc, tex, bib, typ, sol, cairo, vy, wit, graphqls, gql, avsc,
+                       thrift, capnp, fbs, ron, kdl, dhall, jsonnet, libsonnet, asm, sv, vhd,
+                       vhdl, pyi, pyx, pxd, whl, gemspec, podspec, rake, erb, haml, slim, cfm,
+                       dockerfile, containerfile, editorconfig]
 
   drift:
     correction_message_regex: "outdated|stale|fix|update|rename|correct|no longer|deprecat|moved|removed"
