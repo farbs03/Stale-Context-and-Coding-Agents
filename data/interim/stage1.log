@@ -1,0 +1,27 @@
+windows searched: 100 (truncated: 1, incomplete: 0); hits: 12696 raw, 11305 exact-case unique files, 9966 repos
+metadata: 9966 repos, 9966 found, 9966 non-fork/non-archived, 993 with stars >= 10
+context files under excluded directories (mirrors/templates/examples/...): 529 of 11305
+context files checked: 1089 (errors: 0); passing commit/age filters: 381
+repos passing all filters: 358; keeping top 150
+=== Stage 1 summary: 150 repos ===
+median context-file commits: 16.0 (min 8, max 142)
+median stars: 54
+language distribution (top 15):
+language
+TypeScript    34
+Python        33
+Rust          22
+Go            11
+C#             7
+C++            6
+Swift          5
+Shell          5
+JavaScript     4
+HTML           3
+PHP            3
+Dart           2
+Nix            2
+Lean           2
+Elixir         2
+context files by name: {'AGENTS.md': 93, 'CLAUDE.md': 80}
+acceptance (>= 50 repos): PASS

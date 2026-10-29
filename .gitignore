@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 .pytest_cache/
 data/repos/
+# REST commit responses contain commit-author emails: keep locally (cache), never commit.
+data/raw/commits/

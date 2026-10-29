@@ -23,7 +23,22 @@ data/interim/            # derived, reproducible from scripts
 data/processed/          # final datasets, coding sheets
 data/repos/              # git clones (gitignored)
 outputs/tables/, outputs/figures/   # report-ready artifacts (LaTeX tables, PDFs)
+DECISIONS.md             # deviations from the plans, one line each
 ```
+
+## Phase 1 commands
+
+Use the venv: `.venv/Scripts/python` (Python 3.11). `GITHUB_TOKEN` is read from the
+environment or `.env`.
+
+```
+python -m phase1.check_env      # Stage 0: token + git version
+python -m phase1.discover       # Stage 1: code-search sample -> data/interim/repos.csv
+python -m pytest -q tests       # run before committing
+```
+
+API responses are cached gzipped under `data/raw/<namespace>/` (`phase1/github_api.py`);
+`data/raw/commits/` is gitignored because it holds commit-author emails.
 
 ## How to work
 

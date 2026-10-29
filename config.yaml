@@ -10,6 +10,12 @@ phase1:
   n_pilot: 50             # pilot = first n_pilot rows of the shuffled sample
   max_per_repo_in_sample: 3
   seed: 42
+  as_of_date: "2026-10-28"   # reference date for min_days_since_file_created
+  # Context files under these directory names (case-insensitive) are copies or shipped
+  # artifacts, not instructions for this repo's agents; they are excluded in Stage 1.
+  exclude_path_segments: [mirrors, mirror, vendor, vendored, third_party, third-party,
+                          node_modules, templates, template, examples, example, fixtures,
+                          testdata, i18n, translations, locales]
   reference_types: [PATH, SCRIPT, TOOL, IDENT]   # drop IDENT first if short on time
 
   env:
@@ -20,11 +26,15 @@ phase1:
     api_base: https://api.github.com
     per_page: 100
     max_results_per_query: 1000     # documented cap for /search/code
-    # Initial size: partitions (bytes) for code search; any partition whose
-    # total_count exceeds the cap is split in half recursively.
-    search_size_min: 0
-    search_size_max: 400000          # only files < 384 KB are indexed
-    min_partition_width: 1           # stop splitting below this width
+    # Code search matches ~1M files per filename, far beyond the per-query cap, so
+    # Stage 1 draws a seeded random sample of narrow size: windows (log-uniform
+    # start size, width = max(1, start * rel_width)) and fetches every hit in each.
+    # Windows over the cap are halved until they fit. See DECISIONS.md.
+    search_size_lo: 100
+    search_size_hi: 100000
+    search_window_rel_width: 0.0005
+    search_windows_per_filename: 50   # prefix-stable: raising it extends the sample
+    graphql_batch_size: 50
     max_retries: 8
     backoff_base_seconds: 5
     request_timeout_seconds: 30
@@ -38,6 +48,37 @@ phase1:
 
   extract:
     ident_min_length: 4
+    known_filenames: [Makefile, makefile, GNUmakefile, Dockerfile, Containerfile, justfile,
+                      Justfile, Procfile, Gemfile, Rakefile, Jenkinsfile, Vagrantfile,
+                      Brewfile, Pipfile, Tiltfile, Caddyfile, LICENSE, CODEOWNERS]
+    known_dotfiles: [.env, .gitignore, .gitattributes, .github, .editorconfig, .nvmrc,
+                     .node-version, .python-version, .tool-versions, .prettierrc,
+                     .eslintrc, .husky, .vscode, .devcontainer, .dockerignore, .npmrc,
+                     .cursorrules, .cursor, .claude, .gitmodules, .changeset, .yarnrc,
+                     .babelrc, .flake8, .pylintrc, .swcrc, .browserslistrc]
+    # Plain-text tokens that look like files but are product names (lowercased).
+    path_stoplist: [node.js, next.js, vue.js, nuxt.js, nest.js, three.js, d3.js, chart.js,
+                    express.js, react.js, angular.js, ember.js, backbone.js, socket.io,
+                    alpine.js, solid.js, p5.js, tf.js, deno.json, and/or, i/o, n/a, w/o,
+                    read/write, input/output, true/false, client/server, tcp/ip, ci/cd,
+                    yes/no, on/off, get/set, pros/cons, ui/ux, a/b]
+    system_path_prefixes: [usr, etc, tmp, var, dev, opt, bin, sbin, home, proc, sys,
+                           Users, mnt, Applications, Library, System, private, root, lib]
+    ident_stoplist: [TypeScript, JavaScript, GitHub, GitLab, PostgreSQL, MySQL, SQLite,
+                     MongoDB, GraphQL, OpenAI, OpenAPI, PyPI, macOS, iOS, iPadOS, NextJS,
+                     NodeJS, VSCode, DynamoDB, CloudFlare, Cloudflare, WebSocket, WebSockets,
+                     YouTube, LinkedIn, FastAPI, PyTorch, TensorFlow, JetBrains, IntelliJ,
+                     PowerShell, DevTools, LangChain, LlamaIndex, ChatGPT, DeepSeek,
+                     HuggingFace, PostCSS, TailwindCSS, ESLint, BigQuery, ClickHouse,
+                     RabbitMQ, ElasticSearch, OAuth, JSDoc, TSDoc, NumPy, SciPy, CircleCI,
+                     README, TODO, FIXME, CHANGELOG, CONTRIBUTING, YAML, JSON, HTML, HTTP,
+                     HTTPS, UUID, CRUD, REST, TOML, true_or_false]
+    script_builtins: [install, i, add, remove, rm, uninstall, update, up, upgrade, ci, init,
+                      create, dlx, exec, x, link, unlink, publish, pack, audit, outdated,
+                      list, ls, why, info, config, set, version, login, logout, cache,
+                      store, prune, dedupe, import, rebuild, help, workspace, workspaces,
+                      global, bin, root, env, patch, approve-builds, self-update, setup,
+                      licenses, node, plugin, constraints, dlx, upgrade-interactive]
     known_extensions: [py, js, ts, tsx, jsx, mjs, cjs, json, yaml, yml, toml, md, sh,
                        go, rs, java, kt, rb, php, c, h, cpp, hpp, cs, swift, sql,
                        html, css, scss, txt, cfg, ini, lock, env, mdx, vue, svelte,
@@ -45,7 +86,20 @@ phase1:
 
   drift:
     correction_message_regex: "outdated|stale|fix|update|rename|correct|no longer|deprecat|moved|removed"
-    ident_grep_excludes: [":(exclude)*.md", ":(exclude)*.mdx", ":(exclude)docs/**", ":(exclude)doc/**"]
+    # git pathspecs: without :(glob), "*" also matches "/", so *.md covers nested files.
+    # Agent-rule files are excluded so a context file's own text never "resolves" an IDENT.
+    ident_grep_excludes: [":(exclude)*.md", ":(exclude)*.mdx", ":(exclude)*.mdc",
+                          ":(exclude)*.rst", ":(exclude)docs/*", ":(exclude)*/docs/*",
+                          ":(exclude)doc/*", ":(exclude)*/doc/*", ":(exclude).cursorrules",
+                          ":(exclude).windsurfrules", ":(exclude)*.lock",
+                          ":(exclude)*-lock.json", ":(exclude)*-lock.yaml"]
+    workers: 6
+
+  sample:
+    # Proportional allocation across ref_type strata, but at least this many per stratum
+    # (or all available). Each row carries sampling_weight = N_h / n_h for Stage 6.
+    min_per_stratum: 10
+    n_permalinks_to_verify: 5
 
   coding_cards:
     context_lines: 3
